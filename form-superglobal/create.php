@@ -8,15 +8,18 @@
     // echo "</pre>";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Sanitize and validate inputs
         $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_SPECIAL_CHARS);
 
+        // Validate inputs
         if ($username && $email && $phone && isset($_FILES['contact_image'])) {
             //Ensure directory exists
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
+            // Handle file upload
             $imageName = time() . "_" . basename($_FILES['contact_image']['name']);
             $uploadFilePath = $uploadDir . $imageName;
 
