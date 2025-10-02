@@ -1,11 +1,13 @@
 <?php
+$name = "sujon";
+$age = 42;
+$isBrother = true;
+$money = 800;
 
-$str = "Hello Friend!";
-echo $str . '<br>';
-echo strtolower($str) . '<br>';
-echo strtoupper($str) . '<br>';
-echo str_word_count($str) . '<br>';
-echo strrev($str) . '<br>';
+echo $name . "<br>";
+echo "The number is: " . $age . "<br>";
+echo "Boolean value: " . ($isBrother ? "true" : "false") . "<br>";
+echo "Money: " . $money . "<br>";
 // Don't remove this closing tag
 ?>
 <!-- This HTML comment helps keep the PHP closing tag -->
