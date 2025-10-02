@@ -9,9 +9,9 @@ form-superglobal/
 │   ├── setup.php            ← Creates database & table
 │   └── functions.php        ← Simple database functions
 ├── uploads/                 ← Contact photos
-├── simple_index.php         ← Main page (view contacts)
+├── index.php                ← Main page (view contacts)
 ├── add.php                  ← Add new contact
-└── simple_delete.php        ← Delete contact
+└── delete.php               ← Delete contact
 ```
 
 ## 🚀 How to Use
@@ -20,7 +20,7 @@ form-superglobal/
 Visit: `http://localhost:8000/form-superglobal/database/setup.php`
 
 ### 2. Use the App
-Visit: `http://localhost:8000/form-superglobal/simple_index.php`
+Visit: `http://localhost:8000/form-superglobal/index.php`
 
 ## 📝 What Each File Does
 
@@ -39,9 +39,9 @@ define('DB_NAME', 'contacts_db');  // Database name
 - `emailExists()` - Check if email already used
 
 ### Main Files
-- **`simple_index.php`** - Shows all contacts
+- **`index.php`** - Shows all contacts
 - **`add.php`** - Form to add new contact  
-- **`simple_delete.php`** - Removes contact
+- **`delete.php`** - Removes contact
 
 ## 🎓 Learning Benefits
 

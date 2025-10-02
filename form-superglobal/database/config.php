@@ -6,11 +6,11 @@ define('DB_PASS', '');
 define('DB_NAME', 'contacts_db');
 
 // Simple connection function
-function connect() {
+function connect()
+{
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     if ($conn->connect_error) {
         die("Cannot connect: " . $conn->connect_error);
     }
     return $conn;
 }
-?>

@@ -27,7 +27,7 @@ if ($_POST) {
         // Add to database
         if (addContact($name, $email, $phone, $imagePath)) {
             $_SESSION['message'] = "Contact '$name' added successfully!";
-            header('Location: simple_index.php');
+            header('Location: index.php');
             exit;
         } else {
             $_SESSION['error'] = "Failed to add contact!";
@@ -102,7 +102,7 @@ if ($_POST) {
         <input type="file" name="image" accept="image/*">
 
         <button type="submit">💾 Save Contact</button>
-        <a href="simple_index.php" class="btn-secondary">❌ Cancel</a>
+        <a href="index.php" class="btn-secondary">❌ Cancel</a>
     </form>
 
     <hr>

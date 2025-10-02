@@ -1,101 +1,96 @@
 <?php
 session_start();
-$contactFile = 'contacts.json';
-$contacts = file_exists($contactFile) ? json_decode(file_get_contents($contactFile), true) : [];
+require_once 'database/functions.php';
+
+$contacts = getAllContacts();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Management</title>
+    <title>My Contacts</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-    .contact-card {
-        border: 1px solid #ccc;
-        padding: 15px;
-        margin: 10px 0;
-        border-radius: 5px;
-    }
+        .contact {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
 
-    .btn {
-        display: inline-block;
-        padding: 8px 16px;
-        margin: 5px;
-        text-decoration: none;
-        border-radius: 3px;
-    }
+        .btn {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
 
-    .btn-primary {
-        background-color: #007bff;
-        color: white;
-    }
+        .btn-danger {
+            background: #dc3545;
+        }
 
-    .btn-danger {
-        background-color: #dc3545;
-        color: white;
-    }
+        .alert {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
 
-    .alert {
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 5px;
-    }
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+        }
 
-    .alert-success {
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-    }
-
-    .alert-error {
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-    }
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Contact Management System</h1>
+    <h1>📞 My Contacts</h1>
 
-    <?php if (isset($_SESSION['success'])): ?>
-    <div class="alert alert-success"><?php echo $_SESSION['success'];
-                                            unset($_SESSION['success']); ?></div>
+    <?php if (isset($_SESSION['message'])): ?>
+        <div class="alert alert-success"><?= $_SESSION['message'] ?></div>
+        <?php unset($_SESSION['message']); ?>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['error'])): ?>
-    <div class="alert alert-error"><?php echo $_SESSION['error'];
-                                        unset($_SESSION['error']); ?></div>
+        <div class="alert alert-error"><?= $_SESSION['error'] ?></div>
+        <?php unset($_SESSION['error']); ?>
     <?php endif; ?>
 
-    <a href="create.php" class="btn btn-primary">Create New Contact</a>
-    <hr>
+    <a href="add.php" class="btn">➕ Add Contact</a>
+    <a href="database/setup.php" class="btn">🔧 Setup Database</a>
+
+    <h3>Total Contacts: <?= count($contacts) ?></h3>
 
     <?php if (empty($contacts)): ?>
-    <p>No contacts found. <a href="create.php">Create your first contact</a></p>
+        <p>No contacts yet. <a href="add.php">Add your first contact!</a></p>
     <?php else: ?>
-    <?php foreach ($contacts as $index => $contact): ?>
-    <div class="contact-card">
-        <h2><?php echo htmlspecialchars($contact['username']); ?></h2>
-        <p><strong>Email:</strong> <?php echo htmlspecialchars($contact['email']); ?></p>
-        <p><strong>Phone:</strong> <?php echo htmlspecialchars($contact['phone']); ?></p>
-        <?php if (!empty($contact['image']) && file_exists($contact['image'])): ?>
-        <img src="<?php echo htmlspecialchars($contact['image']); ?>"
-            alt="<?php echo htmlspecialchars($contact['username']); ?>" style="max-width:200px; border-radius: 5px;">
-        <?php else: ?>
-        <p><em>No image available.</em></p>
-        <?php endif; ?>
-        <br>
-        <a href="delete.php?id=<?php echo $index; ?>" class="btn btn-danger"
-            onclick="return confirm('Are you sure you want to delete this contact?')">Delete</a>
-    </div>
-    <?php endforeach; ?>
+        <?php foreach ($contacts as $contact): ?>
+            <div class="contact">
+                <h3><?= htmlspecialchars($contact['name']) ?></h3>
+                <p>📧 <?= htmlspecialchars($contact['email']) ?></p>
+                <p>📱 <?= htmlspecialchars($contact['phone']) ?></p>
+                <p>📅 Added: <?= date('M j, Y', strtotime($contact['created_at'])) ?></p>
+
+                <?php if ($contact['image'] && file_exists($contact['image'])): ?>
+                    <img src="<?= $contact['image'] ?>" style="max-width: 100px; border-radius: 5px;">
+                <?php endif; ?>
+
+                <br><br>
+                <a href="delete.php?id=<?= $contact['id'] ?>" class="btn btn-danger"
+                    onclick="return confirm('Delete <?= htmlspecialchars($contact['name']) ?>?')">
+                    🗑️ Delete
+                </a>
+            </div>
+        <?php endforeach; ?>
     <?php endif; ?>
 </body>
 
