@@ -52,62 +52,62 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Contact</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+    .form-group {
+        margin-bottom: 15px;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="file"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            max-width: 300px;
-        }
+    input[type="text"],
+    input[type="email"],
+    input[type="file"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        max-width: 300px;
+    }
 
-        .btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    .btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
-        .btn:hover {
-            background-color: #0056b3;
-        }
+    .btn:hover {
+        background-color: #0056b3;
+    }
 
-        .btn-secondary {
-            background-color: #6c757d;
-            margin-left: 10px;
-            text-decoration: none;
-            display: inline-block;
-        }
+    .btn-secondary {
+        background-color: #6c757d;
+        margin-left: 10px;
+        text-decoration: none;
+        display: inline-block;
+    }
 
-        .alert {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-        }
+    .alert {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+    }
 
-        .alert-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
+    .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
     </style>
 </head>
 
@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>Create New Contact</h1>
 
     <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-error"><?php echo $_SESSION['error'];
+    <div class="alert alert-error"><?php echo $_SESSION['error'];
                                         unset($_SESSION['error']); ?></div>
     <?php endif; ?>
 
